@@ -11,8 +11,8 @@ export default async function PostPage({ params }) {
   const post = await getPost(id);
 
   return (
-    <div className="p-5">
-      <h1 className="text-xl font-bold">{post.title}</h1>
+    <div className="p-5 text-center bg-gray-700 text-white">
+      <h1 className="text-xl font-bold my-2">{post.title}</h1>
       <p>{post.body}</p>
     </div>
   );
