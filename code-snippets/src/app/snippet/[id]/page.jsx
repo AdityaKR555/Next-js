@@ -2,14 +2,26 @@
 
 import { SnippetDataContext } from "@/context/SnippetContext";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { use, useContext } from "react";
 
 function page({ params }) {
-  const { snippets } = useContext(SnippetDataContext);
+  const { snippets, setSnippets } = useContext(SnippetDataContext);
+
+  const router = useRouter();
 
   const resolvedparams = use(params);
   const id = resolvedparams.id;
   const snippet = snippets.find((s) => s.id === Number(id));
+
+const deleteSnippet = () => {
+  const confirmDelete = confirm("Are you sure you want to delete?");
+  if (!confirmDelete) return;
+  const updatedSnippets = snippets.filter(s => s.id !== Number(id))
+  setSnippets(updatedSnippets);
+  router.push("/");
+}
+
   return (
     <div>
       {snippet && (
@@ -23,7 +35,7 @@ function page({ params }) {
                     Edit
                   </button>
                 </Link>
-                <button className="bg-red-900 py-2 px-5 rounded-xl border-2 text-white font-semibold hover:bg-amber-900">
+                <button className="bg-red-900 py-2 px-5 rounded-xl border-2 text-white font-semibold hover:bg-amber-900" onClick={deleteSnippet}>
                   Delete
                 </button>
               </div>
@@ -31,6 +43,7 @@ function page({ params }) {
             <div className="border-2 rounded-xl p-6 min-h-[50vh]">
                  <p>{snippet?.code}</p>
             </div>
+            <button onClick={() => router.push("/")} className="bg-gray-900 hover:bg-gray-700 text-xl px-4 py-2 rounded-xl w-[40%] ml-auto">Go to Home</button>
           </div>
         </div>
       )}
