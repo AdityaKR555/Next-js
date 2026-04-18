@@ -1,5 +1,9 @@
 import React from 'react'
 
+export const metadata = {
+  title: "Service",
+}
+
 async function page( { params } ) {
     const { service } = await params;
   return (
