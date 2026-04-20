@@ -41,7 +41,7 @@
 
 async function page() {
 
-//    const [res1, res2] = await Promise.all(["https://procodrr.vercel.app/?sleep=2000", "https://procodrr.vercel.app/?sleep=3000"]);
+//    const [res1, res2] = await Promise.all([fetch("https://procodrr.vercel.app/?sleep=2000"), fetch("https://procodrr.vercel.app/?sleep=3000")]);
 
 //    const [data1, data2] = await Promise.all([res1.json(), res2.json()]);
 
