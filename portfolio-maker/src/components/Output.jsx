@@ -1,6 +1,35 @@
-import React from "react";
+import { toPng } from "html-to-image";
+import jsPDF from "jspdf";
 
 function Output({ data, theme, setTheme }) {
+  //function to download the portfolio as pdf
+  const downloadPDF = async () => {
+    const element = document.getElementById("preview");
+
+    const dataUrl = await toPng(element, {
+      cacheBust: true,
+      pixelRatio: 2,
+      backgroundColor: theme === "dark" ? "#132A13" : "#ffffff",
+    });
+
+    const pdf = new jsPDF("p", "mm", "a4");
+
+    const imgWidth = 210;
+
+    // Get actual element dimensions for correct aspect ratio
+    const imgHeight = (canvasHeight * imgWidth) / canvasWidth;
+
+    // prevent overflow
+    if (imgHeight > 297) {
+      pdf.addImage(dataUrl, "PNG", 0, 0, imgWidth, 297);
+    } else {
+      pdf.addImage(dataUrl, "PNG", 0, 0, imgWidth, imgHeight);
+    }
+
+    pdf.addImage(dataUrl, "PNG", 0, 0, imgWidth, imgHeight);
+    pdf.save("portfolio.pdf");
+  };
+
   return (
     <div className="w-full md:w-1/2 space-y-6 overflow-y-auto min-h-[90vh]">
       <p className="text-2xl text-[#90A955] font-semibold ml-2">
@@ -10,13 +39,15 @@ function Output({ data, theme, setTheme }) {
       <div
         id="preview"
         className={`border p-6 rounded-xl space-y-6 ${
-          theme === "dark" ? "bg-[#132A13] text-white" : "bg-[#efefef] text-black"
+          theme === "dark" ? "bg-[#132A13] text-white" : "bg-white text-black"
         } transition-all duration-500 ease-in`}
       >
         {/* 🔹 Name + Bio */}
         <div>
           <h1 className="text-3xl font-bold">{data.name || "Your Name"}</h1>
-          <p className={`mt-2 ${theme === "dark" ? "text-gray-300" : "text-gray-800"}`}>
+          <p
+            className={`mt-2 ${theme === "dark" ? "text-gray-300" : "text-gray-800"}`}
+          >
             {data.bio || "Your bio will appear here..."}
           </p>
         </div>
@@ -35,7 +66,9 @@ function Output({ data, theme, setTheme }) {
                 </span>
               ))
             ) : (
-              <p className={`text-gray-400 ${theme === "dark" ? "text-gray-400" : "text-gray-800"}`}>
+              <p
+                className={`text-gray-400 ${theme === "dark" ? "text-gray-400" : "text-gray-800"}`}
+              >
                 No skills added
               </p>
             )}
@@ -56,7 +89,9 @@ function Output({ data, theme, setTheme }) {
                   {project.title || "Project Title"}
                 </h3>
 
-                <p className={`text-md mt-1 ${theme === "dark" ? "text-gray-300" : "text-gray-800"}`}>
+                <p
+                  className={`text-md mt-1 ${theme === "dark" ? "text-gray-300" : "text-gray-800"}`}
+                >
                   {project.description || "Project description..."}
                 </p>
 
@@ -72,7 +107,11 @@ function Output({ data, theme, setTheme }) {
               </div>
             ))
           ) : (
-            <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-800'}`}>No projects added</p>
+            <p
+              className={`${theme === "dark" ? "text-gray-400" : "text-gray-800"}`}
+            >
+              No projects added
+            </p>
           )}
         </div>
 
@@ -103,15 +142,25 @@ function Output({ data, theme, setTheme }) {
           </div>
 
           {!data.social.github && !data.social.linkedin && (
-            <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-800'}`}>No social links added</p>
+            <p
+              className={`${theme === "dark" ? "text-gray-400" : "text-gray-800"}`}
+            >
+              No social links added
+            </p>
           )}
         </div>
       </div>
       <button
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        className="px-4 py-2 bg-black text-white rounded-xl hover:bg-gray-800 ml-auto block mr-2"
+        className="px-4 py-2 bg-black text-white rounded-xl hover:bg-gray-800 ml-auto block mr-2 cursor-pointer"
       >
         Switch Portfolio Theme
+      </button>
+      <button
+        onClick={downloadPDF}
+        className="px-4 py-2 bg-green-700 text-white rounded-xl hover:bg-green-950 ml-auto block mr-2 cursor-pointer"
+      >
+        Download PDF
       </button>
     </div>
   );
