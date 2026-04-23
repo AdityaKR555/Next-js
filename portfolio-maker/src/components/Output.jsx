@@ -17,14 +17,8 @@ function Output({ data, theme, setTheme }) {
     const imgWidth = 210;
 
     // Get actual element dimensions for correct aspect ratio
-    const imgHeight = (canvasHeight * imgWidth) / canvasWidth;
-
-    // prevent overflow
-    if (imgHeight > 297) {
-      pdf.addImage(dataUrl, "PNG", 0, 0, imgWidth, 297);
-    } else {
-      pdf.addImage(dataUrl, "PNG", 0, 0, imgWidth, imgHeight);
-    }
+    const imgHeight =
+    (element.offsetHeight * imgWidth) / element.offsetWidth;
 
     pdf.addImage(dataUrl, "PNG", 0, 0, imgWidth, imgHeight);
     pdf.save("portfolio.pdf");
