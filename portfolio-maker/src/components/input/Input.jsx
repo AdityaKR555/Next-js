@@ -56,13 +56,13 @@ function Input({ data, setData }) {
 
   return (
     <div className="w-full md:w-1/2 space-y-6 overflow-y-auto min-h-[90vh]">
-      <p className="text-2xl text-[#90A955] font-semibold">
+      <p className="text-2xl text-[#90A955] font-semibold ml-2">
         Fill Following Details:
       </p>
 
       {/* Personal Info */}
-      <div className="border p-4 rounded-xl bg-[#4F772D] border-[#132A13]">
-        <h2 className="font-bold mb-2 text-black">Personal Info</h2>
+      <div className="border p-4 rounded-xl bg-[#132A13] border-white">
+        <h2 className="font-bold mb-2">Personal Info</h2>
 
         <input
           className="w-full border py-2 px-4 mb-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#90A955]"
@@ -80,8 +80,8 @@ function Input({ data, setData }) {
       </div>
 
       {/* Skills */}
-      <div className="border p-4 rounded-xl bg-[#4F772D] border-[#132A13]">
-        <h2 className="font-bold mb-2 text-black">Skills</h2>
+      <div className="border p-4 rounded-xl bg-[#132A13] border-white">
+        <h2 className="font-bold mb-2">Skills</h2>
         <div>
           <form onSubmit={(e) => addSkill(e)} className="flex gap-2">
             <input
@@ -103,7 +103,7 @@ function Input({ data, setData }) {
           {data.skills.map((skill, i) => (
             <span
               key={i}
-              className="bg-[#90A955] px-4 py-2 rounded-lg cursor-pointer font-semibold hover:text-red-600"
+              className="bg-[#90A955] px-4 py-2 text-black rounded-lg cursor-pointer font-semibold hover:text-red-600"
               onClick={() => removeSkill(i)}
             >
               {skill} ✕
@@ -114,12 +114,12 @@ function Input({ data, setData }) {
 
       {/* Projects */}
 
-      <div className="border p-4 rounded-xl bg-[#4F772D] border-[#132A13]">
-        <h2 className="font-bold mb-2 text-black">Projects</h2>
+      <div className="border p-4 rounded-xl bg-[#132A13] border-white">
+        <h2 className="font-bold mb-2">Projects</h2>
         {data.projects.map((project, index) => (
           <div
             key={index}
-            className="border-3 border-black p-4 rounded-xl mb-4 flex flex-col gap-3"
+            className="border-3 border-white p-4 rounded-xl mb-4 flex flex-col gap-3"
           >
             <input
               placeholder="title"
@@ -159,8 +159,8 @@ function Input({ data, setData }) {
 
       {/* Social Links */}
 
-      <div className="border p-4 rounded-xl bg-[#4F772D] border-[#132A13]">
-        <h2 className="font-bold mb-2 text-black">Social Links</h2>
+      <div className="border p-4 rounded-xl bg-[#132A13] border-white">
+        <h2 className="font-bold mb-2">Social Links</h2>
         <div className="flex flex-col gap-3">
         <input type="text" placeholder="GitHub" value={data.social.github} onChange={e => handleSocial("github", e.target.value)} className="border py-2 px-4 flex-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#90A955]"/>
         <input type="text" placeholder="LinkedIn" value={data.social.linkedin} onChange={e => handleSocial("linkedin", e.target.value)} className="border py-2 px-4 flex-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#90A955]"/>

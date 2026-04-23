@@ -10,17 +10,19 @@ export default function Home() {
     name : "",
     bio : "",
     skills : [],
-    projects: [{ title: "", desc: "", link: "" }],
+    projects: [{ title: "", description: "", link: "" }],
     social: {
       github: "",
       linkedin: ""
     }
   });
 
+  const [theme, setTheme] = useState("dark");
+
   return (
-   <div className="flex p-6 gap-4 items-center flex-col md:flex-row">
+   <div className="flex p-6 gap-4 flex-col md:flex-row">
      <Input data={data} setData={setData} />
-     <Output data={data} />
+     <Output data={data} theme={theme} setTheme={setTheme} />
    </div>
   );
 }
