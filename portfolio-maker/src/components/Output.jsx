@@ -36,7 +36,7 @@ function Output({ data, theme, setTheme }) {
           theme === "dark" ? "bg-[#132A13] text-white" : "bg-white text-black"
         } transition-all duration-500 ease-in`}
       >
-        {/* 🔹 Name + Bio */}
+        {/* Name + Bio */}
         <div>
           <h1 className="text-3xl font-bold">{data.name || "Your Name"}</h1>
           <p
@@ -46,7 +46,7 @@ function Output({ data, theme, setTheme }) {
           </p>
         </div>
 
-        {/* 🔹 Skills */}
+        {/* Skills */}
         <div>
           <h2 className="text-xl font-semibold mb-2">Skills</h2>
           <div className="flex flex-wrap gap-2">
@@ -69,7 +69,7 @@ function Output({ data, theme, setTheme }) {
           </div>
         </div>
 
-        {/* 🔹 Projects */}
+        {/* Projects */}
         <div>
           <h2 className="text-xl font-semibold mb-2">Projects</h2>
 
@@ -109,7 +109,7 @@ function Output({ data, theme, setTheme }) {
           )}
         </div>
 
-        {/* 🔹 Social */}
+        {/* Social */}
         <div>
           <h2 className="text-xl font-semibold mb-2">Social</h2>
 
